@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\Lighting-Basic.dir/objects.a
+D:\Scoop\apps\mingw\13.1.0-rt_v11-rev1\bin\ar.exe qc CMakeFiles\Lighting-Basic.dir/objects.a @CMakeFiles\Lighting-Basic.dir\objects1.rsp
+D:\Scoop\apps\mingw\13.1.0-rt_v11-rev1\bin\c++.exe -g -Wl,--whole-archive CMakeFiles\Lighting-Basic.dir/objects.a -Wl,--no-whole-archive -o G:\OpenGL\Lighting\Lighting-Basic\Lighting-Basic.exe -Wl,--out-implib,G:\OpenGL\Lighting\Lighting-Basic\libLighting-Basic.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Lighting-Basic.dir\linkLibs.rsp
