@@ -87,6 +87,7 @@ glm::vec3 objects[] =
 {
     glm::vec3(0.0f, 0.0f, 0.0f),
     glm::vec3(3.0f, -1.0f, 2.0f),
+    glm::vec3(-4.0f, 4.0f, 4.0f),
     glm::vec3(2.0f, 2.0f, 2.0f),
 };
 
@@ -154,6 +155,7 @@ int main()
     {
         glm::vec3(1.0f, 0.5f, 0.0f),
         glm::vec3(0.0f, 0.0f, 1.0f),
+        glm::vec3(0.9f, 0.9f, 1.0f)
     };
     glm::vec3 lineColor = glm::vec3(0.0f, 0.0f, 0.0f);
 
@@ -214,10 +216,10 @@ int main()
         GLint lightPosLoc = glGetUniformLocation(objectShader.Program, "lightPos");
         GLint viewPosLoc = glGetUniformLocation(objectShader.Program, "viewPos");
         glUniform3f(viewPosLoc, camera.Pos.x, camera.Pos.y, camera.Pos.z);
-        glUniform3fv(lightPosLoc, 1, &objects[2][0]);
+        glUniform3fv(lightPosLoc, 1, &objects[3][0]);
         glUniform3fv(lightColorLoc,1 ,&lightColor[0]);
 
-        for (int i = 0 ;i < 2; i++)
+        for (int i = 0 ;i < 3; i++)
         {
             // Draw the object
             glm::mat4 model = glm::make_mat4x4(I_4);
@@ -254,7 +256,8 @@ int main()
         glUniform3fv(lightColorLoc,1 ,&lightColor[0]);
 
         glm::mat4 model = glm::make_mat4x4(I_4);
-        model = glm::translate(model, objects[2]);
+        model = glm::translate(model, objects[3]);
+        model = glm::scale(model,glm::vec3(0.2f, 0.2f, 0.2f));
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
         glUniform3fv(objectColorLoc, 1, &lightColor[0]);
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);

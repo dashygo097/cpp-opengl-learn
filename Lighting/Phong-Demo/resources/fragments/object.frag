@@ -11,6 +11,9 @@ uniform vec3 objectColor;
 
 void main()
 {
+
+    float strength = 10.0f;
+
     // Ambient
 
     float k_a = 0.1f;
@@ -18,19 +21,20 @@ void main()
 
     // Diffuse
 
-    float k_d = 0.8f;
-    vec3 dist_source = normalize(lightPos - Pos);
-    float diff = k_d * max(0.0f, dot(Normal, dist_source)); 
-    vec3 diffuse = diff * lightColor;
+    float k_d = 1.2f;
+    vec3 dist_source = lightPos - Pos;
+    float diff = k_d * max(0.0f, dot(Normal, normalize(dist_source))); 
+    strength = strength / dot(dist_source, dist_source);
+    vec3 diffuse = diff * lightColor * strength;
 
     // Specular
 
-    float k_s = 2.5f;
+    float k_s = 3.5f;
     int p_ = 16;
     vec3 dist_view = normalize(viewPos - Pos);
     vec3 half_angle = normalize(dist_view + dist_source);
     float spec = max(0.0f, dot(Normal, half_angle));
-    vec3 specular = k_s * pow(spec, p_) * lightColor;
+    vec3 specular = k_s * pow(spec, p_) * lightColor * strength;
 
     // Blinn-Phong
 
