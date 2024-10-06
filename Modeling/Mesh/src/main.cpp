@@ -281,7 +281,7 @@ int main()
 
         viewPosLoc = glGetUniformLocation(floorShader.Program, "viewPos");
 
-        shineLoc = glGetUniformLocation(floorShader.Program, "material_1.shininess");
+        shineLoc = glGetUniformLocation(floorShader.Program, "material_2.shininess");
 
         lightStrengthLoc = glGetUniformLocation(floorShader.Program, "light.strength");
         lightPosLoc = glGetUniformLocation(floorShader.Program, "light.position");
