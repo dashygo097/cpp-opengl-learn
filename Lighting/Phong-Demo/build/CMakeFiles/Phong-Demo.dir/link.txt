@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\Phong-Demo.dir/objects.a
-D:\Scoop\apps\mingw\13.1.0-rt_v11-rev1\bin\ar.exe qc CMakeFiles\Phong-Demo.dir/objects.a @CMakeFiles\Phong-Demo.dir\objects1.rsp
-D:\Scoop\apps\mingw\13.1.0-rt_v11-rev1\bin\c++.exe -g -Wl,--whole-archive CMakeFiles\Phong-Demo.dir/objects.a -Wl,--no-whole-archive -o G:\cpp-opengl-learn\Lighting\Phong-Demo\Phong-Demo.exe -Wl,--out-implib,G:\cpp-opengl-learn\Lighting\Phong-Demo\libPhong-Demo.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Phong-Demo.dir\linkLibs.rsp
