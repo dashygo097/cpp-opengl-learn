@@ -43,12 +43,6 @@ struct PointLight
     vec3 specular;
 };
 
-uniform vec3 objectColor;
-uniform vec3 viewPos;
-uniform Material material_2;
-uniform PointLight light_1;
-
-
 
 vec3 CalcPointLight(PointLight light, Material material, vec3 Normal, vec3 viewPos)
 {
@@ -69,6 +63,39 @@ vec3 CalcPointLight(PointLight light, Material material, vec3 Normal, vec3 viewP
     vec3 specular = vec3(texture(material.specular, Coord)) * pow(spec, material.shininess) * light.color * strength;
 
     // Blinn-Phong
+    ambient = ambient * light.ambient;
+    diffuse = diffuse * light.diffuse;
+    specular = specular * light.specular;
+
+    vec3 result = (ambient + diffuse + specular);
+    return result;
+}
+
+
+vec3 CalcSpotLight(SpotLight light, Material material, vec3 Normal, vec3 viewPos)
+{
+    // Ambient
+    vec3 ambient = vec3(texture(material.diffuse, Coord)) * light.color;
+
+    // Diffuse
+    vec3 dist_source = light.position - Pos;
+    vec3 diff = vec3(texture(material.diffuse, Coord)) * abs(dot(Normal, normalize(dist_source))); 
+    float strength = light.strength / dot(dist_source, dist_source);
+    float theta = dot(normalize(dist_source), normalize(-light.direction));
+    float epsilon = light.cutoff - light.outercutoff;
+    float intensity = clamp((theta - light.outercutoff) / epsilon, 0.0f, 1.0f);
+    vec3 diffuse = diff * light.color * strength;
+
+    // Specular
+    vec3 dist_view = normalize(viewPos - Pos);
+    vec3 half_angle = normalize(normalize(dist_view) + normalize(dist_source));
+    float spec = abs(dot(Normal, half_angle));
+    vec3 specular = vec3(texture(material.specular, Coord)) * pow(spec, material.shininess) * light.color * strength;
+
+    // Blinn-Phong
+    diffuse *= intensity;
+    specular *= intensity;
+
     ambient = ambient * light.ambient;
     diffuse = diffuse * light.diffuse;
     specular = specular * light.specular;
@@ -112,38 +139,11 @@ vec3 CalcSpotLight(SpotLight light, myTexture texture, vec3 Normal, vec3 viewPos
     return result;
 }
 
+uniform vec3 objectColor;
+uniform vec3 viewPos;
+uniform Material material_2;
+uniform PointLight light_1;
 
-vec3 CalcSpotLight(SpotLight light, Material material, vec3 Normal, vec3 viewPos)
-{
-    // Ambient
-    vec3 ambient = vec3(texture(material.diffuse, Coord)) * light.color;
-
-    // Diffuse
-    vec3 dist_source = light.position - Pos;
-    vec3 diff = vec3(texture(material.diffuse, Coord)) * abs(dot(Normal, normalize(dist_source))); 
-    float strength = light.strength / dot(dist_source, dist_source);
-    float theta = dot(normalize(dist_source), normalize(-light.direction));
-    float epsilon = light.cutoff - light.outercutoff;
-    float intensity = clamp((theta - light.outercutoff) / epsilon, 0.0f, 1.0f);
-    vec3 diffuse = diff * light.color * strength;
-
-    // Specular
-    vec3 dist_view = normalize(viewPos - Pos);
-    vec3 half_angle = normalize(normalize(dist_view) + normalize(dist_source));
-    float spec = abs(dot(Normal, half_angle));
-    vec3 specular = vec3(texture(material.specular, Coord)) * pow(spec, material.shininess) * light.color * strength;
-
-    // Blinn-Phong
-    diffuse *= intensity;
-    specular *= intensity;
-
-    ambient = ambient * light.ambient;
-    diffuse = diffuse * light.diffuse;
-    specular = specular * light.specular;
-
-    vec3 result = (ambient + diffuse + specular);
-    return result;
-}
 
 void main()
 {
