@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\Smooth-Move.dir/objects.a
-D:\Scoop\apps\mingw\13.1.0-rt_v11-rev1\bin\ar.exe qc CMakeFiles\Smooth-Move.dir/objects.a @CMakeFiles\Smooth-Move.dir\objects1.rsp
-D:\Scoop\apps\mingw\13.1.0-rt_v11-rev1\bin\c++.exe -g -Wl,--whole-archive CMakeFiles\Smooth-Move.dir/objects.a -Wl,--no-whole-archive -o G:\OpenGL\MyProjects\Smooth-Moving\Smooth-Move.exe -Wl,--out-implib,G:\OpenGL\MyProjects\Smooth-Moving\libSmooth-Move.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Smooth-Move.dir\linkLibs.rsp
