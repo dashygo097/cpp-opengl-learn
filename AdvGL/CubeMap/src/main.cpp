@@ -1,7 +1,5 @@
 #include "camera.h"
 #include "mesh.h"
-#include "extension.h"
-#include "fbo.h"
 
 int width = 2400,height = 1600, numColth;
 
@@ -255,7 +253,7 @@ int main()
         LightProperty("direction", glm::vec3(0.5f, -3.0f, 2.0f)),
         LightProperty("color", glm::vec3(1.0f)),
         LightProperty("ambient", glm::vec3(0.6f)),
-        LightProperty("diffuse", glm::vec3(1.5f)),
+        LightProperty("diffuse", glm::vec3(0.8f)),
         LightProperty("specular", glm::vec3(2.0f)),
     };
 
@@ -316,10 +314,6 @@ int main()
 
     // Skybox
     SkyboxMesh skyboxmesh(skyboxVertices, indices, faces);
-
-
-
-
 
 
     // Program

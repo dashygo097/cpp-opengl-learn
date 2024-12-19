@@ -1,6 +1,5 @@
 #include "camera.h"
 #include "mesh.h"
-#include "extension.h"
 #include "fbo.h"
 
 int width = 1600,height = 1600, numColth;

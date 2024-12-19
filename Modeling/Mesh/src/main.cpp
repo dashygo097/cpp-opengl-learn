@@ -221,7 +221,9 @@ int main()
         GLint lightSpecularLoc = glGetUniformLocation(objectShader.Program, "light.specular");
 
 
-        glUniform1f(lightStrengthLoc, 50.0f); 
+        glUniform3fv(viewPosLoc, 1, &camera.Pos[0]);
+        glUniform1f(shineLoc, 512.0f);
+        glUniform1f(lightStrengthLoc, 100.0f); 
         glUniform3fv(lightPosLoc, 1, &lightobjects[0][0]);
         glUniform3fv(lightColorLoc, 1, &lightColor[0][0]);
         glUniform3f(lightAmbientLoc, 0.1f, 0.1f, 0.1f);
@@ -232,7 +234,6 @@ int main()
         for (int i = 0 ;i < 3; i++)
         {
             // Draw the object
-            glUniform1f(shineLoc, 32.0f);
             model = glm::translate(model, objects[i]);
             model = glm::rotate(model, float(-55.0f / 180.0f * M_PI), glm::vec3(1.0f, 0.5f, 0.7f));
             glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -290,8 +291,9 @@ int main()
         lightDiffuseLoc = glGetUniformLocation(floorShader.Program, "light.diffuse");
         lightSpecularLoc = glGetUniformLocation(floorShader.Program, "light.specular");
 
-        glUniform1f(shineLoc, 16.0f);
-        glUniform1f(lightStrengthLoc, 50.0f); 
+        glUniform3fv(viewPosLoc, 1, &camera.Pos[0]);
+        glUniform1f(shineLoc, 64.0f);
+        glUniform1f(lightStrengthLoc, 100.0f); 
         glUniform3fv(lightPosLoc, 1, &lightobjects[0][0]);
         glUniform3fv(lightColorLoc, 1, &lightColor[0][0]);
         glUniform3f(lightAmbientLoc, 0.1f, 0.1f, 0.1f);

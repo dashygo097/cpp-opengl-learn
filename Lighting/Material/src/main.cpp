@@ -231,7 +231,8 @@ int main()
         GLint lightDiffuseLoc = glGetUniformLocation(objectShader.Program, "light.diffuse");
         GLint lightSpecularLoc = glGetUniformLocation(objectShader.Program, "light.specular");
 
-        glUniform1f(shineLoc, 16.0f);
+        glUniform3fv(viewPosLoc, 1, &camera.Pos[0]);
+        glUniform1f(shineLoc, 512.0f);
 
         glUniform1f(lightStrengthLoc, 50.0f); 
         glUniform3fv(lightPosLoc, 1, &objects[3][0]);
@@ -280,6 +281,7 @@ int main()
 
         // Draw 
 
+        glUniform3fv(viewPosLoc, 1, &camera.Pos[0]);
         lightColorLoc = glGetUniformLocation(lightShader.Program, "lightColor");
         glUniform3fv(lightColorLoc,1 ,&lightColor[0]);
 
